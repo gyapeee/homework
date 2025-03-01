@@ -10,7 +10,6 @@ public abstract class TestBase {
     public void setup() {
         WebDriverManager.chromedriver().setup();
         Driver.set(new ChromeDriver());
-        System.setProperty("log4j2.debug", "true");
     }
 
     @AfterMethod
