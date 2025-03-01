@@ -10,8 +10,8 @@
     - ~~UI~~
     - API
     - ~~Sequential run~~
-- Reporting
-    - Logging
+- ~~Reporting~~
+    - ~~Logging~~
 
 ## Test implementation
 
@@ -25,9 +25,9 @@
 
 - Parallel run
     - Verify both sequential and parallel run
-- GitHub actions
-    - build
-    - CI
+- ~~GitHub actions~~
+    - ~~build~~
+    - ~~CI~~
 - Find advanced waiting mechanism
 - Write a basic driver handler
 - Customize Http client
