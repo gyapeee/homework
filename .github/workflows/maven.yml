@@ -29,3 +29,5 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B compile --file pom.xml
+    - name: CI with selenium
+      run: mvn test --file pom.xml
