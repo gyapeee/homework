@@ -2,7 +2,7 @@
 
 ## Prepare project
 - ~~Create github repo~~
-- Create maven project
+- ~~Create maven project~~
 - Add dependencies 
   - Additional dependencies like WDM(optional)
 - Basic smoke tests(UI and API)
