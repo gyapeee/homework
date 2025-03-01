@@ -3,8 +3,8 @@
 ## Prepare project
 - ~~Create github repo~~
 - ~~Create maven project~~
-- Add dependencies 
-  - Additional dependencies like WDM(optional)
+- ~~Add dependencies~~ 
+  - ~~Additional dependencies like WDM(optional)~~
 - Basic smoke tests(UI and API)
   - Sequential run
     - Verify
