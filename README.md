@@ -23,6 +23,7 @@
 
 ## Extra improvements
 
+- Use PageObjects
 - Parallel run
     - Verify both sequential and parallel run
 - ~~GitHub actions~~
