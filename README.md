@@ -6,9 +6,9 @@
 - ~~Create maven project~~
 - ~~Add dependencies~~
     - ~~Additional dependencies like WDM(optional)~~
-- Basic tests
+- ~~Basic tests~~
     - ~~UI~~
-    - API
+    - ~~API~~
     - ~~Sequential run~~
 - ~~Reporting~~
     - ~~Logging~~
@@ -19,7 +19,7 @@
 - Test 2
 - Test 3
 - Test 4
-- Test 5 - REST api
+- ~~Test 5 - REST api~~
 
 ## Extra improvements
 
@@ -29,7 +29,7 @@
     - ~~build~~
     - ~~CI~~
 - Find advanced waiting mechanism
-- Write a basic driver handler
+- ~~Write a basic driver handler~~
 - Customize Http client
 - Use Rest Assured
 - Allure reports
