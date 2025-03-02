@@ -1,20 +1,48 @@
 package runner;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import util.ConfigProperties;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class TestBase {
-    @BeforeMethod
-    public void setup() {
-        WebDriverManager.chromedriver().setup();
-        Driver.set(new ChromeDriver());
-        System.setProperty("log4j2.debug", "true");
-    }
+  static ConfigProperties config = ConfigFactory.create(ConfigProperties.class);
 
-    @AfterMethod
-    public void teardown() {
-        Driver.quit();
-    }
+  @BeforeMethod
+  public void setup() {
+    WebDriverManager.chromedriver()
+                    .setup();
+    Driver.set(new ChromeDriver(options()));
+  }
+
+  @AfterMethod
+  public void teardown() {
+    Driver.quit();
+  }
+
+  private static ChromeOptions options() {
+    List<String> arguments = new ArrayList<>();
+
+    arguments.add("--no-sandbox");
+    arguments.add("--window-size=1920x1080");
+    arguments.add("--user-data-dir=/tmp/chrome-user-data");
+
+      if (config.disableDevShmUsage()) {
+          arguments.add("--disable-dev-shm-usage");
+      }
+      if (config.headless()) {
+          arguments.add("--headless=new");
+      }
+      if (config.disableGpu()) {
+          arguments.add("--disable-gpu");
+      }
+
+    return new ChromeOptions().addArguments(arguments);
+  }
 }
