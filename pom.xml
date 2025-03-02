@@ -56,6 +56,11 @@
             <artifactId>webdrivermanager</artifactId>
             <version>5.9.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>1.0.12</version>
+        </dependency>
     </dependencies>
 
 </project>
