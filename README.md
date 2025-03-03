@@ -23,6 +23,8 @@
 
 ## Extra improvements
 
+- Use PageObjects
+- Retry tests
 - Parallel run
     - Verify both sequential and parallel run
 - ~~GitHub actions~~
@@ -33,3 +35,8 @@
 - Customize Http client
 - Use Rest Assured
 - Allure reports
+- Stability run example
+
+## Questions
+
+- is it ok to fill any data as Checkout Info(firstName, lastNem, ZipCode) during checkout process?
