@@ -1,6 +1,6 @@
 package page;
 
-import data.Credentials;
+import data.Credential;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -20,6 +20,9 @@ public class LoginPage {
     @FindBy(css = "[data-test='login-button']")
     private WebElement loginButton;
 
+    @FindBy(css = "[data-test='error']")
+    private WebElement error;
+
     public LoginPage() {
         Driver.get().get("https://www.saucedemo.com/inventory.html");
         PageFactory.initElements(Driver.get(), this);
@@ -28,9 +31,19 @@ public class LoginPage {
         Wait.forVisible(loginButton);
     }
 
-    public void login(Credentials credentials) {
+    public ProductsPage login(Credential credentials) {
         Fill.in(username, credentials.getUsername());
         Fill.in(password, credentials.getPassword());
         Click.on(loginButton);
+        return new ProductsPage();
+    }
+
+    public LoginPage clickOnLoginButton() {
+        Click.on(loginButton);
+        return this;
+    }
+
+    public String getErrorText() {
+        return Wait.forVisible(error).getText();
     }
 }

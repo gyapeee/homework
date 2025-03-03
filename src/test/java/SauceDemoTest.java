@@ -1,13 +1,11 @@
 import com.google.gson.Gson;
-import data.Credentials;
+import data.Credential;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.LoginPage;
 import page.ProductsPage;
 import page.component.CheckoutCompleted;
-import runner.Driver;
 import runner.TestBase;
 
 import java.io.IOException;
@@ -19,11 +17,13 @@ import java.util.Objects;
 @Slf4j
 public class SauceDemoTest extends TestBase {
 
-    private static final String INCORRECT_LOGIN_HEADER_TITLE = "Incorrect Login Header Title";
-    private static final String INCORRECT_TITLE = "Incorrect title";
-    private static final Credentials credentials;
+    private static final Credential[] credentials;
     private static final int EXPECTED_NUMBER_OF_ITEMS = 2;
     private static final String THANK_YOU_FOR_YOUR_ORDER = "Thank you for your order!";
+    private static final int STANDARD_USER_INDEX = 1;
+    private static final int PERFORMANCE_GLITCH_USER_INDEX = 0;
+    private static final String YEAR_2025 = "2025";
+    private static final String TERMS_OF_SERVICE = "Terms of Service";
 
     static {
         try {
@@ -36,7 +36,7 @@ public class SauceDemoTest extends TestBase {
     @Test
     public void automatePurchaseProcessTest1() {
         // Given
-        new LoginPage().login(credentials);
+        new LoginPage().login(credentials[PERFORMANCE_GLITCH_USER_INDEX]);
 
         // When
         ProductsPage productsPage = new ProductsPage().clickOnAddItemButtons(
@@ -56,22 +56,28 @@ public class SauceDemoTest extends TestBase {
     }
 
     @Test
-    public void openSwagLabsTest() {
+    public void verifyLoginErrorAndFooterTest2() {
         // Given
         // When
-        Driver.get().get("https://onlinehtmleditor.dev");
+        LoginPage loginPage = new LoginPage().clickOnLoginButton();
 
         // Then
-        Assert.assertEquals(Driver.get().findElement(By.tagName("h1")).getText(), "Online HTML Editor",
-                INCORRECT_LOGIN_HEADER_TITLE);
-        Assert.assertEquals(Driver.get().getTitle(), "Free online HTML editor - onlinehtmleditor.dev", INCORRECT_TITLE);
+        Assert.assertEquals(loginPage.getErrorText(), "Epic sadface: Username is required", "Error message is wrong");
+
+        // And When
+        ProductsPage productsPage = loginPage.login(credentials[STANDARD_USER_INDEX]);
+
+        Assert.assertTrue(productsPage.getFooter().getCopyRight().getText().contains(YEAR_2025),
+                YEAR_2025 + " is missing from the footer");
+        Assert.assertTrue(productsPage.getFooter().getCopyRight().getText().contains(TERMS_OF_SERVICE),
+                TERMS_OF_SERVICE + " is missing from the footer");
     }
 
-    private static Credentials loadCredentialsJson() throws IOException {
+    private static Credential[] loadCredentialsJson() throws IOException {
         InputStream credentialsStream = SauceDemoTest.class.getResourceAsStream("credentials.json");
         InputStreamReader credentialsReader = new InputStreamReader(Objects.requireNonNull(credentialsStream));
 
-        Credentials credentials = new Gson().fromJson(credentialsReader, Credentials.class);
+        Credential[] credentials = new Gson().fromJson(credentialsReader, Credential[].class);
 
         credentialsReader.close();
         return credentials;

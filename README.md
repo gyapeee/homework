@@ -39,4 +39,5 @@
 
 ## Questions
 
-- is it ok to fill any data as Checkout Info(firstName, lastNem, ZipCode) during checkout process?
+- is it ok filling any data as Checkout Info(firstName, lastNem, ZipCode) during checkout process?
+- Is it ok adding standard_user to credentials.properties

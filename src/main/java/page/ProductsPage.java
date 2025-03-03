@@ -1,11 +1,13 @@
 package page;
 
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import page.component.CheckoutCompleted;
 import page.component.CheckoutInfo;
 import page.component.CheckoutOverview;
+import page.component.Footer;
 import runner.Driver;
 import util.action.Click;
 import util.action.Scroll;
@@ -15,6 +17,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class ProductsPage {
+    @Getter
+    private final Footer footer;
+
     @FindBy(css = "[data-test='shopping-cart-badge']")
     private WebElement shoppingCartBadge;
 
@@ -30,6 +35,7 @@ public class ProductsPage {
     public ProductsPage() {
         PageFactory.initElements(Driver.get(), this);
         Wait.forVisible(shoppingCartLink);
+        footer = new Footer();
     }
 
     public ProductsPage clickOnAddItemButtons(List<String> itemLocators) {
