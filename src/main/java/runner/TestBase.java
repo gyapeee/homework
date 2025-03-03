@@ -12,37 +12,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class TestBase {
-  static ConfigProperties config = ConfigFactory.create(ConfigProperties.class);
+    static ConfigProperties config = ConfigFactory.create(ConfigProperties.class);
 
-  @BeforeMethod
-  public void setup() {
-    WebDriverManager.chromedriver()
-                    .setup();
-    Driver.set(new ChromeDriver(options()));
-  }
+    @BeforeMethod
+    public void setup() {
+        WebDriverManager.chromedriver()
+                .setup();
+        Driver.set(new ChromeDriver(options()));
+    }
 
-  @AfterMethod
-  public void teardown() {
-    Driver.quit();
-  }
+    @AfterMethod
+    public void teardown() {
+        Driver.quit();
+    }
 
-  private static ChromeOptions options() {
-    List<String> arguments = new ArrayList<>();
+    private static ChromeOptions options() {
+        List<String> arguments = new ArrayList<>();
 
-    arguments.add("--no-sandbox");
-    arguments.add("--window-size=1920x1080");
-    arguments.add("--user-data-dir=/tmp/chrome-user-data");
+        arguments.add("--no-sandbox");
+        arguments.add("--window-size=1920x1080");
+        arguments.add("--user-data-dir=/tmp/chrome-user-data");
+        arguments.add("--incognito");
 
-      if (config.disableDevShmUsage()) {
-          arguments.add("--disable-dev-shm-usage");
-      }
-      if (config.headless()) {
-          arguments.add("--headless=new");
-      }
-      if (config.disableGpu()) {
-          arguments.add("--disable-gpu");
-      }
+        if (config.disableDevShmUsage()) {
+            arguments.add("--disable-dev-shm-usage");
+        }
+        if (config.headless()) {
+            arguments.add("--headless=new");
+        }
+        if (config.disableGpu()) {
+            arguments.add("--disable-gpu");
+        }
 
-    return new ChromeOptions().addArguments(arguments);
-  }
+        return new ChromeOptions().addArguments(arguments);
+    }
 }
