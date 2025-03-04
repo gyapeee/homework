@@ -17,4 +17,8 @@ public class Wait {
     public static WebElement forVisible(WebElement element) {
         return WAIT_5_SECONDS_POLLING_200_MILLIS.until(ExpectedConditions.visibilityOf(element));
     }
+
+    public static WebElement forClickable(WebElement element) {
+        return WAIT_5_SECONDS_POLLING_200_MILLIS.until(ExpectedConditions.elementToBeClickable(element));
+    }
 }
