@@ -19,6 +19,7 @@ public abstract class TestBase {
         WebDriverManager.chromedriver()
                 .setup();
         Driver.set(new ChromeDriver(options()));
+        Driver.get().manage().window().maximize();
     }
 
     @AfterMethod
@@ -30,7 +31,6 @@ public abstract class TestBase {
         List<String> arguments = new ArrayList<>();
 
         arguments.add("--no-sandbox");
-        arguments.add("--window-size=1920x1080");
         arguments.add("--user-data-dir=/tmp/chrome-user-data");
         arguments.add("--incognito");
 
