@@ -34,7 +34,7 @@ public class SauceDemoTest extends TestBase {
     }
 
     @Test
-    public void automatePurchaseProcessTest1() {
+    public void automatePurchaseProcess_Test_1() {
         // Given
         new LoginPage().login(credentials[PERFORMANCE_GLITCH_USER_INDEX]);
 
@@ -56,7 +56,7 @@ public class SauceDemoTest extends TestBase {
     }
 
     @Test
-    public void verifyLoginErrorAndFooterTest2() {
+    public void verifyLoginErrorAndFooter_Test_2() {
         // Given
         // When
         LoginPage loginPage = new LoginPage().clickOnLoginButton();

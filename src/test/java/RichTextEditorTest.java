@@ -13,7 +13,7 @@ public class RichTextEditorTest extends TestBase {
     private static final String NEITHER_ALPHANUMERIC_NOR_SPACE = "[^a-zA-Z0-9 ]";
 
     @Test
-    public void validateTextInRichTextEditor() {
+    public void validateTextInRichTextEditor_Test3() {
         //Given
         RichTextEditorPage editor = new RichTextEditorPage()
                 // When
