@@ -20,7 +20,7 @@ public class ApiTest {
     public static final String URL = "https://jsonplaceholder.typicode.com/users";
 
     @Test
-    public void getUsersAndVerifyAtInFirstEmail() throws IOException {
+    public void getUsersAndVerifyAtInFirstEmail_Test_5() throws IOException {
         log.info("Making a GET request for " + URL);
         Response response = makeGetRequest(URL);
 
