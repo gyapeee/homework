@@ -32,4 +32,4 @@ jobs:
         run: mvn clean compile
 
       - name: CI with selenium
-        run: mvn clean test -DconfigFile=config.properties -DsuiteXmlFile=testng.xml
+        run: mvn clean test -DconfigFile=config.properties
