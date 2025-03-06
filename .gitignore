@@ -26,4 +26,6 @@ replay_pid*
 /target/
 /.idea/
 /.mvn/
+/allure-report/
+/allure-results/
 

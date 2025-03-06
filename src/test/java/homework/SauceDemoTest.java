@@ -1,3 +1,5 @@
+package homework;
+
 import com.google.gson.Gson;
 import data.Credential;
 import lombok.extern.slf4j.Slf4j;
@@ -74,7 +76,7 @@ public class SauceDemoTest extends TestBase {
     }
 
     private static Credential[] loadCredentialsJson() throws IOException {
-        InputStream credentialsStream = SauceDemoTest.class.getResourceAsStream("credentials.json");
+        InputStream credentialsStream = SauceDemoTest.class.getResourceAsStream("../data/credentials.json");
         InputStreamReader credentialsReader = new InputStreamReader(Objects.requireNonNull(credentialsStream));
 
         Credential[] credentials = new Gson().fromJson(credentialsReader, Credential[].class);
