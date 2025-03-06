@@ -31,6 +31,7 @@
     - ~~build~~
     - ~~CI~~
 - Find advanced waiting mechanism
+    - Each test class can set up a fluent wait for Wait actions
 - ~~Write a basic driver handler~~
 - Customize Http client
 - Use Rest Assured

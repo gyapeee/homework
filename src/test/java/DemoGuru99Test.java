@@ -38,7 +38,7 @@ public class DemoGuru99Test extends TestBase {
         WebElement emailInput = Wait.forVisible(By.id("philadelphia-field-email"), _10_SECONDS, _1000_MILLIS);
         Fill.in(emailInput, "user@randommail.com");
 
-        Click.on(SUBMIT_BUTTON);
+        Click.on(SUBMIT_BUTTON, _10_SECONDS, _1000_MILLIS);
 
         Alert alert = Driver.get().switchTo().alert();
         Assert.assertTrue(alert.getText().contains(SUCCESSFULLY),
