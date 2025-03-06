@@ -28,7 +28,7 @@ public class DemoGuru99Test extends TestBase {
         Frame.doUnderIFrame(IFRAME_ID, () -> Click.on(By.cssSelector("[src='Jmeter720.png']"), _10_SECONDS, _1000_MILLIS));
 
         Driver.switchToWindow(lastWindowHandle());
-        Wait.forVisible(By.id("post-542"));
+        Wait.forVisible(By.id("post-542"), _10_SECONDS, _1000_MILLIS);
 
         Driver.get().close();
         Driver.switchToWindow(homeWindowHandle);

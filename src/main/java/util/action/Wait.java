@@ -33,6 +33,10 @@ public class Wait {
         return WAIT_5_SECONDS_POLLING_200_MILLIS.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public static WebElement forVisible(By locator, int seconds, int millis) {
+        return fluentWait(seconds, millis).until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
     public static WebElement forClickable(WebElement element) {
         return WAIT_5_SECONDS_POLLING_200_MILLIS.until(ExpectedConditions.elementToBeClickable(element));
     }
