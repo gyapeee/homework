@@ -13,6 +13,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  schedule:
+    - cron: '15 22,10-18 * * *'
 
 jobs:
   build-and-test:
