@@ -46,8 +46,8 @@ public class DemoGuru99Test extends TestBase {
 
         alert.accept();
 
-        Click.on(By.xpath("//a[contains(text(),'Selenium')]"));
-        Click.on(By.xpath("//a[contains(text(),'Tooltip')]"));
+        Click.on(By.xpath("//a[contains(text(),'Selenium')]"), _10_SECONDS, _1000_MILLIS);
+        Click.on(By.xpath("//a[contains(text(),'Tooltip')]"), _10_SECONDS, _1000_MILLIS);
 
         Assert.assertNotNull(Driver.get().findElement(By.id("download_now")), "Download now should be present");
     }
