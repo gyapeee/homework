@@ -8,6 +8,8 @@ import runner.TestBase;
 import util.action.*;
 
 import static runner.Driver.lastWindowHandle;
+import static util.action.Wait._1000_MILLIS;
+import static util.action.Wait._10_SECONDS;
 
 public class DemoGuru99Test extends TestBase {
 
@@ -19,11 +21,11 @@ public class DemoGuru99Test extends TestBase {
     public void iframeTabHandlingAlertTest_Test_4() {
         Driver.get().get("http://demo.guru99.com/test/guru99home");
 
-        Scroll.to(Wait.forPresence(IFRAME_ID, 10, 1000));
+        Scroll.to(Wait.forPresence(IFRAME_ID, _10_SECONDS, _1000_MILLIS));
 
         String homeWindowHandle = Driver.get().getWindowHandle();
 
-        Frame.doUnderIFrame(IFRAME_ID, () -> Click.on(By.cssSelector("[src='Jmeter720.png']")));
+        Frame.doUnderIFrame(IFRAME_ID, () -> Click.on(By.cssSelector("[src='Jmeter720.png']"), _10_SECONDS, _1000_MILLIS));
 
         Driver.switchToWindow(lastWindowHandle());
         Wait.forVisible(By.id("post-542"));

@@ -10,14 +10,13 @@ import runner.Driver;
 import java.time.Duration;
 
 public class Wait {
+    public static final int _10_SECONDS = 10;
+    public static final int _1000_MILLIS = 1000;
+
     private Wait() {
     }
 
-    private static final FluentWait<WebDriver> WAIT_5_SECONDS_POLLING_200_MILLIS =
-            new FluentWait<>(Driver.get())
-                    .withTimeout(Duration.ofSeconds(5))
-                    .pollingEvery(Duration.ofMillis(200))
-                    .ignoring(Exception.class);
+    private static final FluentWait<WebDriver> WAIT_5_SECONDS_POLLING_200_MILLIS = fluentWait(5, 200);
 
     private static FluentWait<WebDriver> fluentWait(int seconds, int millis) {
         return new FluentWait<>(Driver.get())
@@ -40,6 +39,10 @@ public class Wait {
 
     public static WebElement forClickable(By element) {
         return WAIT_5_SECONDS_POLLING_200_MILLIS.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public static WebElement forClickable(By element, int seconds, int millis) {
+        return fluentWait(seconds, millis).until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public static WebElement forPresence(By element) {
