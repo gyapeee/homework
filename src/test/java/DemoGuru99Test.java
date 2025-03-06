@@ -17,14 +17,12 @@ public class DemoGuru99Test extends TestBase {
 
     @Test
     public void iframeTabHandlingAlertTest_Test_4() {
-        // Given
         Driver.get().get("http://demo.guru99.com/test/guru99home");
 
-        Scroll.to(Wait.forPresence(IFRAME_ID));
+        Scroll.to(Wait.forPresence(IFRAME_ID, 10, 1000));
 
         String homeWindowHandle = Driver.get().getWindowHandle();
 
-        // When
         Frame.doUnderIFrame(IFRAME_ID, () -> Click.on(By.cssSelector("[src='Jmeter720.png']")));
 
         Driver.switchToWindow(lastWindowHandle());
@@ -41,7 +39,8 @@ public class DemoGuru99Test extends TestBase {
         Click.on(SUBMIT_BUTTON);
 
         Alert alert = Driver.get().switchTo().alert();
-        Assert.assertTrue(alert.getText().contains(SUCCESSFULLY), SUCCESSFULLY + " is missing from the alert text: " + alert.getText());
+        Assert.assertTrue(alert.getText().contains(SUCCESSFULLY),
+                SUCCESSFULLY + " is missing from the alert text: " + alert.getText());
 
         alert.accept();
 

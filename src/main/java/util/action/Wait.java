@@ -14,8 +14,17 @@ public class Wait {
     }
 
     private static final FluentWait<WebDriver> WAIT_5_SECONDS_POLLING_200_MILLIS =
-            new FluentWait<>(Driver.get()).withTimeout(
-                    Duration.ofSeconds(5)).pollingEvery(Duration.ofMillis(200)).ignoring(Exception.class);
+            new FluentWait<>(Driver.get())
+                    .withTimeout(Duration.ofSeconds(5))
+                    .pollingEvery(Duration.ofMillis(200))
+                    .ignoring(Exception.class);
+
+    private static FluentWait<WebDriver> fluentWait(int seconds, int millis) {
+        return new FluentWait<>(Driver.get())
+                .withTimeout(Duration.ofSeconds(seconds))
+                .pollingEvery(Duration.ofMillis(millis))
+                .ignoring(Exception.class);
+    }
 
     public static WebElement forVisible(WebElement element) {
         return WAIT_5_SECONDS_POLLING_200_MILLIS.until(ExpectedConditions.visibilityOf(element));
@@ -35,5 +44,9 @@ public class Wait {
 
     public static WebElement forPresence(By element) {
         return WAIT_5_SECONDS_POLLING_200_MILLIS.until(ExpectedConditions.presenceOfElementLocated(element));
+    }
+
+    public static WebElement forPresence(By element, int seconds, int millis) {
+        return fluentWait(seconds, millis).until(ExpectedConditions.presenceOfElementLocated(element));
     }
 }
