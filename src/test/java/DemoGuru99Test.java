@@ -25,7 +25,7 @@ public class DemoGuru99Test extends TestBase {
 
         String homeWindowHandle = Driver.get().getWindowHandle();
 
-        Frame.doUnderIFrame(IFRAME_ID, () -> Click.on(By.cssSelector("[src='Jmeter720.png']"), _10_SECONDS, _1000_MILLIS));
+        Do.underIFrame(IFRAME_ID, () -> Click.on(By.cssSelector("[src='Jmeter720.png']"), _10_SECONDS, _1000_MILLIS));
 
         Driver.switchToWindow(lastWindowHandle());
         Wait.forVisible(By.id("post-542"), _10_SECONDS, _1000_MILLIS);
@@ -35,7 +35,7 @@ public class DemoGuru99Test extends TestBase {
 
         Scroll.to(Wait.forPresence(SUBMIT_BUTTON, _10_SECONDS, _1000_MILLIS));
 
-        WebElement emailInput = Wait.forVisible(By.id("philadelphia-field-email"));
+        WebElement emailInput = Wait.forVisible(By.id("philadelphia-field-email"), _10_SECONDS, _1000_MILLIS);
         Fill.in(emailInput, "user@randommail.com");
 
         Click.on(SUBMIT_BUTTON);
