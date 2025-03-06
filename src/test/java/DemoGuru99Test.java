@@ -33,7 +33,7 @@ public class DemoGuru99Test extends TestBase {
         Driver.get().close();
         Driver.switchToWindow(homeWindowHandle);
 
-        Scroll.to(Wait.forPresence(SUBMIT_BUTTON));
+        Scroll.to(Wait.forPresence(SUBMIT_BUTTON, _10_SECONDS, _1000_MILLIS));
 
         WebElement emailInput = Wait.forVisible(By.id("philadelphia-field-email"));
         Fill.in(emailInput, "user@randommail.com");
