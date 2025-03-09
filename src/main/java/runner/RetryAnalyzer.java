@@ -20,7 +20,7 @@ public class RetryAnalyzer implements IRetryAnalyzer {
     public boolean retry(ITestResult iTestResult) {
         if (retryCount < retryMax) {
             retryCount++;
-            log.info("Thread: %s | Retry attempt #" + retryCount + " of " + retryMax);
+            log.info(String.format("Thread: %s | Retry attempt #%d of %d", Thread.currentThread().getName(), retryCount, retryMax));
             return true;
         }
         return false;
