@@ -2,6 +2,7 @@ package homework;
 
 import com.google.gson.Gson;
 import data.Credential;
+import io.qameta.allure.Description;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -36,6 +37,7 @@ public class SauceDemoTest extends TestBase {
     }
 
     @Test
+    @Description("Verifies purchase process of the sauce lab's demo page")
     public void automatePurchaseProcess_Test_1() {
         // Given
         new LoginPage().login(credentials[PERFORMANCE_GLITCH_USER_INDEX]);
@@ -58,6 +60,7 @@ public class SauceDemoTest extends TestBase {
     }
 
     @Test
+    @Description("Verifies login error on sauce lab's demo page")
     public void verifyLoginErrorAndFooter_Test_2() {
         // Given
         // When

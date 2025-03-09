@@ -1,6 +1,6 @@
 package homework;
 
-import lombok.SneakyThrows;
+import io.qameta.allure.Description;
 import org.aeonbits.owner.ConfigFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,9 +11,9 @@ public class RetryTest extends TestBase {
     private static final ConfigProperties config = ConfigFactory.create(ConfigProperties.class);
     private int runCounter = 0;
 
-    @SneakyThrows
     @Test
-    public void retryDemoRichText() {
+    @Description("This test verifies the retry feature of the framework")
+    public void retryDemoRichText() throws InterruptedException {
         Thread.sleep(2000);
         // Simulate failures
         if (runCounter < config.retryMax() - 1) {

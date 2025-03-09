@@ -25,8 +25,8 @@
 
 - ~~Use PageObjects~~
 - ~~Retry tests~~
-- Parallel run
-    - Verify both sequential and parallel run
+- ~~Parallel run~~
+    - ~~Verify both sequential and parallel run~
 - ~~GitHub actions~~
     - ~~build~~
     - ~~CI~~
@@ -35,13 +35,16 @@
 - ~~Write a basic driver handler~~
 - Customize Http client
 - Use Rest Assured
-- Allure reports
+- ~~Allure reports~~
 - Stability run example
+- Refactoring if needed
+
+#     
 
 ## Questions
 
 - is it ok filling any data as Checkout Info(firstName, lastNem, ZipCode) during checkout process?
-- Is it ok adding standard_user to credentials.properties
+- Is it ok adding standard_user to credentials.properties?
 - What is the precise meaning of the next sentence in test 4?
   "Find the Email Submission text. Fill out the field below it and click the Submit button.". Should I use relative
   locators?

@@ -1,5 +1,6 @@
 package homework;
 
+import io.qameta.allure.Description;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -15,6 +16,7 @@ public class RichTextEditorTest extends TestBase {
     private static final String NEITHER_ALPHANUMERIC_NOR_SPACE = "[^a-zA-Z0-9 ]";
 
     @Test
+    @Description("Playing with rich text editor")
     public void validateTextInRichTextEditor_Test3() {
         //Given
         RichTextEditorPage editor = new RichTextEditorPage()
