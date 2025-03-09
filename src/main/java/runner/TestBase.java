@@ -2,39 +2,57 @@ package runner;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.aeonbits.owner.ConfigFactory;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.grid.Main;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import util.ConfigProperties;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Test(retryAnalyzer = RetryAnalyzer.class)
 public abstract class TestBase {
     static ConfigProperties config = ConfigFactory.create(ConfigProperties.class);
 
-    @BeforeMethod
+    @BeforeTest(alwaysRun = true)
+    public void setUpTest() {
+        // Resolve driver for Selenium Grid
+        WebDriverManager.chromedriver().setup();
+
+        // Start Selenium Grid in standalone mode
+        Main.main(new String[]{"standalone", "--port", "4445"});
+    }
+
+    @BeforeMethod(alwaysRun = true)
     public void setup() {
-        WebDriverManager.chromedriver()
-                .setup();
-        Driver.set(new ChromeDriver(options()));
+        WebDriver driver = WebDriverManager.chromedriver()
+                .remoteAddress("http://localhost:4445/wd/hub")
+                .capabilities(new DesiredCapabilities().merge(options()))
+                .create();
+        Driver.set(driver);
         Driver.get().manage().window().maximize();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void teardown() {
         Driver.quit();
     }
 
-    private static ChromeOptions options() {
+    synchronized private static ChromeOptions options() {
         List<String> arguments = new ArrayList<>();
 
         arguments.add("--no-sandbox");
-        arguments.add("--user-data-dir=/tmp/chrome-user-data");
+        arguments.add("--user-data-dir=/tmp/chrome-user-data-" + ThreadLocalRandom.current().nextLong());
         arguments.add("--incognito");
+        arguments.add("--disable-quic");
+        arguments.add("--disable-search-engine-choice-screen");
+        arguments.add("--remote-debugging-pipe");
 
         if (config.disableDevShmUsage()) {
             arguments.add("--disable-dev-shm-usage");

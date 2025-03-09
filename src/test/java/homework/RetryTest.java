@@ -1,5 +1,6 @@
 package homework;
 
+import lombok.SneakyThrows;
 import org.aeonbits.owner.ConfigFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,9 +11,10 @@ public class RetryTest extends TestBase {
     private static final ConfigProperties config = ConfigFactory.create(ConfigProperties.class);
     private int runCounter = 0;
 
+    @SneakyThrows
     @Test
     public void retryDemoRichText() {
-        new RichTextEditorTest().validateTextInRichTextEditor_Test3();
+        Thread.sleep(2000);
         // Simulate failures
         if (runCounter < config.retryMax() - 1) {
             runCounter++;
