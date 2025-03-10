@@ -82,7 +82,7 @@ jobs:
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          gh_pages: main
+          gh_pages: allure-history
           allure_history: allure-history
           allure_results: target/allure-results
 
@@ -91,5 +91,5 @@ jobs:
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: main
+          publish_branch: allure-history
           publish_dir: allure-history
