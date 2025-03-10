@@ -1,4 +1,4 @@
-package page;
+package page.sauce;
 
 import data.Credential;
 import org.openqa.selenium.WebElement;

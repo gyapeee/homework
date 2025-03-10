@@ -1,4 +1,4 @@
-package page.component;
+package page.sauce.component;
 
 import lombok.Getter;
 import org.openqa.selenium.WebElement;

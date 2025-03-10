@@ -6,11 +6,17 @@ Here are the features of the test framework of the homework
 
 - CI workflow runs in parallel by default: https://github.com/gyapeee/homework/actions/workflows/maven.yml
 - The tests can run sequentially in local if it is required by changing the ```src/test/resources/testng.xml```
+    - Remove ``` parallel="methods" thread-count="6"``` from
+      ```<suite name="Homework Suite" verbose="1" parallel="methods" thread-count="6">```
 
 ## Reporting with Allure
 
 - A Quality gate is provided by scheduling test runs and Allure reports
   history:  https://gyapeee.github.io/homework/index.html
+- See the Retry demonstration at the result of homework.RetryTest.sleepingTwoSecs
+  ![Retry.PNG](img/Retry.PNG)
+- See the screenshot demo at the result of homework.RetryTest.sleepingTwoSecs
+  ![Screenshot.PNG](img/Screenshot.PNG)
 
 ## Homework plan
 
