@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import runner.Driver;
 import runner.TestBase;
 import util.ConfigProperties;
+import util.action.Take;
 
 public class RetryTest extends TestBase {
     private static final ConfigProperties config = ConfigFactory.create(ConfigProperties.class);
@@ -18,7 +19,7 @@ public class RetryTest extends TestBase {
     @Feature("Homework")
     @Story("Retry Test")
     @Description("This test verifies the retry feature of the framework")
-    public void sleepingTwoSecs() throws InterruptedException {
+    public void passesAfterRetriesAndTakesScreenshot() throws InterruptedException {
         Driver.get().get("https://www.saucedemo.com/");
         Thread.sleep(2000);
         // Simulate failures
@@ -26,5 +27,6 @@ public class RetryTest extends TestBase {
             runCounter++;
             Assert.fail("This test fails for demonstrating the retry feature");
         }
+        Take.screenshot();
     }
 }
