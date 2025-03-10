@@ -77,6 +77,10 @@
             <artifactId>allure-testng</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
