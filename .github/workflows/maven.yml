@@ -58,11 +58,12 @@ jobs:
           path: target
           key: build-${{ github.run_id }}
 
-      - name: Download previous Allure history
+      - name: Download previous Allure history (if exists)
         uses: actions/download-artifact@v4
         with:
           name: allure-history
           path: target/allure-results/history
+        continue-on-error: true
 
       - name: CI with Selenium
         run: mvn test -DconfigFile=config/config.properties
@@ -85,11 +86,12 @@ jobs:
           path: target/allure-results
           key: allure-results-${{ github.run_id }}
 
-      - name: Download previous Allure history
+      - name: Download previous Allure history (if exists)
         uses: actions/download-artifact@v4
         with:
           name: allure-history
           path: target/allure-results/history
+        continue-on-error: true
 
       - name: Generate Allure report
         run: |
