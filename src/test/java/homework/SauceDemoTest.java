@@ -3,6 +3,8 @@ package homework;
 import com.google.gson.Gson;
 import data.Credential;
 import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -37,45 +39,54 @@ public class SauceDemoTest extends TestBase {
     }
 
     @Test
+    @Feature("Homework")
+    @Story("Sauce Demo Test")
     @Description("Verifies purchase process of the sauce lab's demo page")
     public void automatePurchaseProcess_Test_1() {
         // Given
+        logStep("Logging in");
         new LoginPage().login(credentials[PERFORMANCE_GLITCH_USER_INDEX]);
 
         // When
+        logStep("Adding items to cart");
         ProductsPage productsPage = new ProductsPage().clickOnAddItemButtons(
-                List.of("add-to-cart-sauce-labs-backpack",
-                        "add-to-cart-sauce-labs-bike-light"));
+                List.of("add-to-cart-sauce-labs-backpack", "add-to-cart-sauce-labs-bike-light"));
 
         // Then
         Assert.assertEquals(productsPage.numberOfItemsInCart(), EXPECTED_NUMBER_OF_ITEMS,
-                "Number of items in cart should be " + EXPECTED_NUMBER_OF_ITEMS);
+                            "Number of items in cart should be " + EXPECTED_NUMBER_OF_ITEMS);
 
         // And When
+        logStep("Checking out products");
         CheckoutCompleted completed = productsPage.checkout("John", "Doe", "6898");
 
         // Then
         Assert.assertEquals(completed.getHeader().getText(), THANK_YOU_FOR_YOUR_ORDER,
-                "Header text should be: " + THANK_YOU_FOR_YOUR_ORDER);
+                            "Header text should be: " + THANK_YOU_FOR_YOUR_ORDER);
     }
 
     @Test
+    @Feature("Homework")
+    @Story("Sauce Demo Test")
     @Description("Verifies login error on sauce lab's demo page")
     public void verifyLoginErrorAndFooter_Test_2() {
         // Given
         // When
+        logStep("Verifying error message");
         LoginPage loginPage = new LoginPage().clickOnLoginButton();
 
         // Then
         Assert.assertEquals(loginPage.getErrorText(), "Epic sadface: Username is required", "Error message is wrong");
 
         // And When
+        logStep("Logging in");
         ProductsPage productsPage = loginPage.login(credentials[STANDARD_USER_INDEX]);
 
+        logStep("Verifying footer data");
         Assert.assertTrue(productsPage.getFooter().getCopyRight().getText().contains(YEAR_2025),
-                YEAR_2025 + " is missing from the footer");
+                          YEAR_2025 + " is missing from the footer");
         Assert.assertTrue(productsPage.getFooter().getCopyRight().getText().contains(TERMS_OF_SERVICE),
-                TERMS_OF_SERVICE + " is missing from the footer");
+                          TERMS_OF_SERVICE + " is missing from the footer");
     }
 
     private static Credential[] loadCredentialsJson() throws IOException {

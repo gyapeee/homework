@@ -1,11 +1,14 @@
 package runner;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.grid.Main;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -19,6 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @Test(retryAnalyzer = RetryAnalyzer.class)
 public abstract class TestBase {
     static ConfigProperties config = ConfigFactory.create(ConfigProperties.class);
+    protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @BeforeTest(alwaysRun = true)
     public void setUpTest() {
@@ -26,15 +30,17 @@ public abstract class TestBase {
         WebDriverManager.chromedriver().setup();
 
         // Start Selenium Grid in standalone mode
-        Main.main(new String[]{"standalone", "--port", "4445"});
+        Main.main(new String[]{
+                "standalone",
+                "--port",
+                "4445"
+        });
     }
 
     @BeforeMethod(alwaysRun = true)
     public void setup() {
-        WebDriver driver = WebDriverManager.chromedriver()
-                .remoteAddress("http://localhost:4445/wd/hub")
-                .capabilities(new DesiredCapabilities().merge(options()))
-                .create();
+        WebDriver driver = WebDriverManager.chromedriver().remoteAddress("http://localhost:4445/wd/hub").capabilities(
+                new DesiredCapabilities().merge(options())).create();
         Driver.set(driver);
         Driver.get().manage().window().maximize();
     }
@@ -66,4 +72,10 @@ public abstract class TestBase {
 
         return new ChromeOptions().addArguments(arguments);
     }
+
+    @Step("{0}")
+    protected void logStep(String message) {
+        log.info(message);
+    }
+
 }
