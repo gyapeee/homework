@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -57,6 +58,13 @@ jobs:
           path: target
           key: build-${{ github.run_id }}
 
+      - name: Download previous Allure history (if exists)
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-history
+          path: target/allure-results/history
+        continue-on-error: true
+
       - name: CI with Selenium
         run: mvn test -DconfigFile=config/config.properties
 
@@ -78,13 +86,24 @@ jobs:
           path: target/allure-results
           key: allure-results-${{ github.run_id }}
 
-      - name: Build test report
-        uses: simple-elf/allure-report-action@v1.7
-        if: always()
+      - name: Download previous Allure history (if exists)
+        uses: actions/download-artifact@v4
         with:
-          gh_pages: allure-history
-          allure_history: allure-history
-          allure_results: target/allure-results
+          name: allure-history
+          path: target/allure-results/history
+        continue-on-error: true
+
+      - name: Generate Allure report
+        run: |
+          mvn allure:report
+          mkdir -p allure-report/history
+          cp -r target/allure-results/history allure-report/history || true
+
+      - name: Upload updated Allure history
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-history
+          path: allure-report/history
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v3
@@ -92,4 +111,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: allure-history
-          publish_dir: allure-history
+          publish_dir: allure-report
