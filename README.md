@@ -11,6 +11,10 @@ Here are the features of the test framework of the homework
 
 - A Quality gate is provided by scheduling test runs and Allure reports
   history:  https://gyapeee.github.io/homework/index.html
+- See the Retry demonstration at the result of homework.RetryTest.sleepingTwoSecs
+  ![Retry.PNG](img/Retry.PNG)
+- See the screenshot demo at the result of homework.RetryTest.sleepingTwoSecs
+  ![Screenshot.PNG](img/Screenshot.PNG)
 
 ## Homework plan
 

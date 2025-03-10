@@ -8,9 +8,9 @@ import io.qameta.allure.Story;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import page.LoginPage;
-import page.ProductsPage;
-import page.component.CheckoutCompleted;
+import page.sauce.LoginPage;
+import page.sauce.ProductsPage;
+import page.sauce.component.CheckoutCompleted;
 import runner.TestBase;
 
 import java.io.IOException;

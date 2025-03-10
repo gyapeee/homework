@@ -1,4 +1,4 @@
-package page.component;
+package page.sauce.component;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
