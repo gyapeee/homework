@@ -1,5 +1,6 @@
 package homework;
 
+import io.qameta.allure.Description;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,8 @@ public class DemoGuru99Test extends TestBase {
     private static final String SUCCESSFULLY = "Successfully";
 
     @Test
+    @Description("Interacts with element in an iframe, closes a browser tag, raises and handling an alert and also " +
+            "dropdown")
     public void iframeTabHandlingAlertTest_Test_4() {
         Driver.get().get("http://demo.guru99.com/test/guru99home");
 

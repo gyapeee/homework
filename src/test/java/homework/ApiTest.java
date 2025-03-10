@@ -1,6 +1,7 @@
 package homework;
 
 import data.User;
+import io.qameta.allure.Description;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Response;
 import org.testng.Assert;
@@ -18,6 +19,7 @@ public class ApiTest {
     public static final String URL = "https://jsonplaceholder.typicode.com/users";
 
     @Test
+    @Description("Gets users from an endpoint parses it and verifies that the first user has @ symbol in it's e-mail")
     public void getUsersAndVerifyAtInFirstEmail_Test_5() throws IOException {
         log.info("Making a GET request for " + URL);
         Response response = Api.makeGetRequest(URL);
