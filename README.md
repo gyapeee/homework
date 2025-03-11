@@ -21,9 +21,6 @@ Here are the features of Selenium, TestNG, Maven and Java based test framework
 ## Logging with slf4j and log4j
 
 - Each driver related action is wrapped with logs in DriverActionListener.java
-- It is a solution to log every event
-- This can be customized by overriding empty default methods(eg. ```default void beforeClick(WebElement element) {}```)
-  of WebDriverListener.
 
 ```java
 
@@ -43,10 +40,12 @@ public class DriverActionListener implements WebDriverListener {
     }
 }
 ```
+- This can be customized by overriding empty default methods(eg. ```default void beforeClick(WebElement element) {}```)
+  of WebDriverListener.
 
 ## Web Driver Manager
 
-- Used for smartly managing chrome drivers
+- Used for smartly managing chrome drivers 
 - Also runs selenium grid programmatically
   ```java 
   
@@ -66,9 +65,9 @@ public class DriverActionListener implements WebDriverListener {
 
 ## Headless mode (default)
 
-- Tests can run in headed mode by changing the ```headless=true``` to ```headless=false```
+- Tests can run in headed mode by changing the ```headless=true``` to ```headless=false``` in ```config.properties file```
 
-## PageObjectModel
+## Implement PageObjectModel
 
 - Test cases use Page Objects to make the framework reusable and maintainable
     - Example Page Object.
