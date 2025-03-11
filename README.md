@@ -108,6 +108,28 @@ public class Scroll {
 }
 ```
 
+## Rest Assured for api tests
+
+- JSON parsing is provided by the RestAssured 3rd party lib so this can cause more maintainable code
+    - BDD like(given/when/then) coding can be done by RestAssured
+
+```java
+
+@Feature("Homework")
+@Story("ApiTest")
+@Description("More compact RestAssured demo")
+public void restAssuredDemo() {
+    io.restassured.response.Response response = get(URL);
+
+    Assert.assertNotNull(response, "Response is null");
+    Assert.assertEquals(response.getStatusCode(), HTTP_OK,
+            "Response code is not " + HTTP_OK + " but " + response.getStatusCode());
+
+    List<User> users = Arrays.asList(response.getBody().as(User[].class));
+    Assert.assertTrue(users.get(0).getEmail().contains("@"), "@ symbol is missing from the first user's email ");
+}
+```
+
 <details>
   <summary>Homework plan</summary>
 
