@@ -1,6 +1,6 @@
 # Test framework features
 
-Here are the features of the test framework of the homework
+Here are the features of Selenium, TestNG, Maven and Java based test framework
 
 ## Parallel test runs with TestNG
 
@@ -18,59 +18,151 @@ Here are the features of the test framework of the homework
 - See the screenshot demo at the result of homework.RetryTest.sleepingTwoSecs
   ![Screenshot.PNG](img/Screenshot.PNG)
 
-## Homework plan
+## Logging with slf4j and log4j
+
+- Each driver related action is wrapped with logs in DriverActionListener.java
+- It is a solution to log every event
+- This can be customized by overriding empty default methods(eg. ```default void beforeClick(WebElement element) {}```)
+  of WebDriverListener.
+
+```java
+
+@Slf4j
+public class DriverActionListener implements WebDriverListener {
+
+    @Override
+    public void beforeAnyCall(Object target, Method method, Object[] args) {
+        log.info(String.format("Thread: %s | Before | Method Name: %s | Method Args: %s",
+                               Thread.currentThread().getName(), method.getName(), Arrays.toString(args)));
+    }
+
+    @Override
+    public void afterAnyCall(Object target, Method method, Object[] args, Object result) {
+        log.info(String.format("Thread: %s | After  | Method Name: %s | Method Args: %s",
+                               Thread.currentThread().getName(), method.getName(), Arrays.toString(args)));
+    }
+}
+```
+
+## Web Driver Manager
+
+- Used for smartly managing chrome drivers
+- Also runs selenium grid programmatically
+  ```java 
+  
+  @BeforeTest(alwaysRun = true)
+  public void setUpTest() {
+      // Resolve driver for Selenium Grid
+      WebDriverManager.chromedriver().setup();
+  
+      // Start Selenium Grid in standalone mode
+      Main.main(new String[]{
+              "standalone",
+              "--port",
+              "4445"
+      });
+  }
+  ```
+
+## Headless mode (default)
+
+- Tests can run in headed mode by changing the ```headless=true``` to ```headless=false```
+
+## PageObjectModel
+
+- Test cases use Page Objects to make the framework reusable and maintainable
+    - Example Page Object.
+    ```java 
+    public class CheckoutCompleted {
+      @FindBy(css = "[data-test='checkout-complete-container']")
+      private WebElement checkoutComplete;
+    
+      @FindBy(css = "[data-test='complete-header']")
+      private WebElement header;
+    
+      public CheckoutCompleted() {
+        PageFactory.initElements(Driver.get(), this);
+        Wait.forVisible(checkoutComplete);
+      }
+    
+      public WebElement getHeader() {
+        return Wait.forVisible(header);
+      }
+    }
+    ```
+
+## Action utility classes
+
+- Use actions via action util classes to make the code more readable
+- Example Action
+
+```java
+public class Scroll {
+    private Scroll() {
+    }
+
+    public static void to(WebElement element) {
+        new Actions(Driver.get()).moveToElement(element).perform();
+    }
+}
+```
+
+<details>
+  <summary>Homework plan</summary>
 
 - Breaking the task down into steps can be seen below
 
-### Prepare project
+#### Prepare project
 
 - ~~Create github repo~~
-- ~~Create maven project~~
-- ~~Add dependencies~~
-    - ~~Additional dependencies like WDM(optional)~~
-- ~~Basic tests~~
-    - ~~UI~~
-    - ~~API~~
-    - ~~Sequential run~~
-- ~~Reporting~~
-    - ~~Logging~~
+    - ~~Create maven project~~
+    - ~~Add dependencies~~
+        - ~~Additional dependencies like WDM(optional)~~
+    - ~~Basic tests~~
+        - ~~UI~~
+        - ~~API~~
+        - ~~Sequential run~~
+    - ~~Reporting~~
+        - ~~Logging~~
 
-### Test implementation
+#### Test implementation
 
 - ~~Test 1~~
-- ~~Test 2~~
-- ~~Test 3~~
-- ~~Test 4~~
-- ~~Test 5 - REST api~~
+    - ~~Test 2~~
+    - ~~Test 3~~
+    - ~~Test 4~~
+    - ~~Test 5 - REST api~~
 
-### Extra improvements
+#### Extra improvements
 
 - ~~Use PageObjects~~
-- ~~Retry tests~~
-- ~~Parallel run~~
-    - ~~Verify both sequential and parallel run~~
-- ~~GitHub actions~~
-    - ~~build~~
-    - ~~CI~~
-- Find advanced waiting mechanism
-    - Each test class can set up a fluent wait for Wait actions
-- ~~Write a basic driver handler~~
-- Customize Http client
-- Use Rest Assured
-- ~~Allure reports~~
-- Stability run example
-- Refactoring if needed
+    - ~~Retry tests~~
+    - ~~Parallel run~~
+        - ~~Verify both sequential and parallel run~~
+    - ~~GitHub actions~~
+        - ~~build~~
+        - ~~CI~~
+    - Find advanced waiting mechanism
+        - Each test class can set up a fluent wait for Wait actions
+    - ~~Write a basic driver handler~~
+    - Customize Http client
+    - Use Rest Assured
+    - ~~Allure reports~~
+    - Stability run example
+    - Refactoring if needed
 
-### Questions
+#### Questions
 
 - is it ok filling any data as Checkout Info(firstName, lastNem, ZipCode) during checkout process?
-- Is it ok adding standard_user to credentials.properties?
-- What is the precise meaning of the next sentence in test 4?
-  "Find the Email Submission text. Fill out the field below it and click the Submit button.". Should I use relative
-  locators?
+    - Is it ok adding standard_user to credentials.properties?
+    - What is the precise meaning of the next sentence in test 4?
+      "Find the Email Submission text. Fill out the field below it and click the Submit button.". Should I use relative
+      locators?
 
-### Dev Notes
+#### Dev Notes
 
 - The **_Test_X** postfix in test method's name is only for the easier identification of the test case regarding the
   documentation
   (description of homework)
+
+</details>
