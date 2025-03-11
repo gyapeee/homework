@@ -12,8 +12,10 @@ import org.testng.annotations.Test;
 import util.api.Api;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
+import static io.restassured.RestAssured.get;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 @Slf4j
@@ -42,6 +44,21 @@ public class ApiTest {
         });
         users.forEach(user -> log.info(user.getName() + " | " + user.getEmail()));
 
+        Assert.assertTrue(users.get(0).getEmail().contains("@"), "@ symbol is missing from the first user's email ");
+    }
+
+    @Test
+    @Feature("Homework")
+    @Story("ApiTest")
+    @Description("More compact RestAssured demo")
+    public void restAssuredDemo() {
+        io.restassured.response.Response response = get(URL);
+
+        Assert.assertNotNull(response, "Response is null");
+        Assert.assertEquals(response.getStatusCode(), HTTP_OK,
+                "Response code is not " + HTTP_OK + " but " + response.getStatusCode());
+
+        List<User> users = Arrays.asList(response.getBody().as(User[].class));
         Assert.assertTrue(users.get(0).getEmail().contains("@"), "@ symbol is missing from the first user's email ");
     }
 
