@@ -30,22 +30,23 @@ public class DriverActionListener implements WebDriverListener {
     @Override
     public void beforeAnyCall(Object target, Method method, Object[] args) {
         log.info(String.format("Thread: %s | Before | Method Name: %s | Method Args: %s",
-                               Thread.currentThread().getName(), method.getName(), Arrays.toString(args)));
+                Thread.currentThread().getName(), method.getName(), Arrays.toString(args)));
     }
 
     @Override
     public void afterAnyCall(Object target, Method method, Object[] args, Object result) {
         log.info(String.format("Thread: %s | After  | Method Name: %s | Method Args: %s",
-                               Thread.currentThread().getName(), method.getName(), Arrays.toString(args)));
+                Thread.currentThread().getName(), method.getName(), Arrays.toString(args)));
     }
 }
 ```
+
 - This can be customized by overriding empty default methods(eg. ```default void beforeClick(WebElement element) {}```)
   of WebDriverListener.
 
 ## Web Driver Manager
 
-- Used for smartly managing chrome drivers 
+- Used for smartly managing chrome drivers
 - Also runs selenium grid programmatically
   ```java 
   
@@ -65,7 +66,8 @@ public class DriverActionListener implements WebDriverListener {
 
 ## Headless mode (default)
 
-- Tests can run in headed mode by changing the ```headless=true``` to ```headless=false``` in ```config.properties file```
+- Tests can run in headed mode by changing the ```headless=true``` to ```headless=false``` in
+  ```config.properties file```
 
 ## Implement PageObjectModel
 
@@ -103,6 +105,28 @@ public class Scroll {
     public static void to(WebElement element) {
         new Actions(Driver.get()).moveToElement(element).perform();
     }
+}
+```
+
+## Rest Assured for api tests
+
+- JSON parsing is provided by the RestAssured 3rd party lib so this can cause more maintainable code
+    - BDD like(given/when/then) coding can be done by RestAssured
+
+```java
+
+@Feature("Homework")
+@Story("ApiTest")
+@Description("More compact RestAssured demo")
+public void restAssuredDemo() {
+    io.restassured.response.Response response = get(URL);
+
+    Assert.assertNotNull(response, "Response is null");
+    Assert.assertEquals(response.getStatusCode(), HTTP_OK,
+            "Response code is not " + HTTP_OK + " but " + response.getStatusCode());
+
+    List<User> users = Arrays.asList(response.getBody().as(User[].class));
+    Assert.assertTrue(users.get(0).getEmail().contains("@"), "@ symbol is missing from the first user's email ");
 }
 ```
 
@@ -144,10 +168,8 @@ public class Scroll {
     - Find advanced waiting mechanism
         - Each test class can set up a fluent wait for Wait actions
     - ~~Write a basic driver handler~~
-    - Customize Http client
-    - Use Rest Assured
+    - ~~Use Rest Assured~~
     - ~~Allure reports~~
-    - Stability run example
     - Refactoring if needed
 
 #### Questions
