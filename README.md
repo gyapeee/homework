@@ -1,4 +1,4 @@
-# Test framework features
+# Test framework features [![Java CI with Maven](https://github.com/gyapeee/homework/actions/workflows/maven.yml/badge.svg)](https://github.com/gyapeee/homework/actions/workflows/maven.yml)
 
 Here are the features of Selenium, TestNG, Maven and Java based test framework
 
