@@ -1,4 +1,4 @@
-# Test framework features [![Java CI with Maven](https://github.com/gyapeee/homework/actions/workflows/maven.yml/badge.svg)](https://github.com/gyapeee/homework/actions/workflows/maven.yml)
+# Test framework features [![Java CI with Maven](https://github.com/gyapeee/homework/actions/workflows/quality-gate.yml/badge.svg)](https://github.com/gyapeee/homework/actions/workflows/quality-gate.yml)
 
 Here are the features of Selenium, TestNG, Maven and Java based test framework
 
@@ -172,6 +172,12 @@ private static CheckoutUser[] loadCheckoutUsersJson() throws IOException {
     return getJson(CheckoutUser[].class, "../data/checkout_users.json");
 }
 ```
+
+## Manual Quality Gate run
+
+- Quality gate could be run manually
+  from [![Java CI with Maven](https://github.com/gyapeee/homework/actions/workflows/quality-gate.yml/badge.svg)](https://github.com/gyapeee/homework/actions/workflows/quality-gate.yml)
+  ![quality-gate-manual-run.PNG](img/quality-gate-manual-run.PNG)
 
 <details>
   <summary>Homework plan</summary>
