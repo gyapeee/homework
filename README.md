@@ -30,13 +30,13 @@ public class DriverActionListener implements WebDriverListener {
     @Override
     public void beforeAnyCall(Object target, Method method, Object[] args) {
         log.info(String.format("Thread: %s | Before | Method Name: %s | Method Args: %s",
-                Thread.currentThread().getName(), method.getName(), Arrays.toString(args)));
+                               Thread.currentThread().getName(), method.getName(), Arrays.toString(args)));
     }
 
     @Override
     public void afterAnyCall(Object target, Method method, Object[] args, Object result) {
         log.info(String.format("Thread: %s | After  | Method Name: %s | Method Args: %s",
-                Thread.currentThread().getName(), method.getName(), Arrays.toString(args)));
+                               Thread.currentThread().getName(), method.getName(), Arrays.toString(args)));
     }
 }
 ```
@@ -108,7 +108,7 @@ public class Scroll {
 }
 ```
 
-## Rest Assured for api tests
+## Rest Assured for API tests
 
 - JSON parsing is provided by the RestAssured 3rd party lib so this can cause more maintainable code
     - BDD like(given/when/then) coding can be done by RestAssured
@@ -123,11 +123,30 @@ public void restAssuredDemo() {
 
     Assert.assertNotNull(response, "Response is null");
     Assert.assertEquals(response.getStatusCode(), HTTP_OK,
-            "Response code is not " + HTTP_OK + " but " + response.getStatusCode());
+                        "Response code is not " + HTTP_OK + " but " + response.getStatusCode());
 
     List<User> users = Arrays.asList(response.getBody().as(User[].class));
     Assert.assertTrue(users.get(0).getEmail().contains("@"), "@ symbol is missing from the first user's email ");
 }
+```
+
+## Customizable waiting
+
+- The waiting mechanism is built upon a default FluentWait with 5 seconds timeout and 200 milliseconds polling time.
+  This can be overwritten by each test class. Here is an example of adding 30 seconds timeout with 1000 milliseconds
+  polling time.
+
+```java
+public class DemoGuru99Test extends TestBase {
+
+    ...
+
+    @BeforeMethod
+    public void setUp() {
+        super.setup();
+        Wait.init(_30_SECONDS, _1000_MILLIS);
+    }
+    ...
 ```
 
 <details>
@@ -165,12 +184,12 @@ public void restAssuredDemo() {
     - ~~GitHub actions~~
         - ~~build~~
         - ~~CI~~
-    - Find advanced waiting mechanism
-        - Each test class can set up a fluent wait for Wait actions
+    - ~~Find advanced waiting mechanism~~
+        - ~~Each test class can set up a fluent wait for Wait actions~~
     - ~~Write a basic driver handler~~
     - ~~Use Rest Assured~~
     - ~~Allure reports~~
-    - Refactoring if needed
+    - Refactoring
 
 #### Questions
 
