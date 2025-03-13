@@ -1,12 +1,14 @@
 package homework;
 
 import com.google.gson.Gson;
+import data.CheckoutUser;
 import data.Credential;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import page.sauce.LoginPage;
 import page.sauce.ProductsPage;
@@ -38,11 +40,11 @@ public class SauceDemoTest extends TestBase {
         }
     }
 
-    @Test
+    @Test(dataProvider = "loadCheckoutUsersJson")
     @Feature("Homework")
     @Story("Sauce Demo Test")
     @Description("Verifies purchase process of the sauce lab's demo page")
-    public void automatePurchaseProcess_Test_1() {
+    public void automatePurchaseProcess_Test_1(CheckoutUser user) {
         // Given
         logStep("Logging in");
         new LoginPage().login(credentials[PERFORMANCE_GLITCH_USER_INDEX]);
@@ -58,7 +60,7 @@ public class SauceDemoTest extends TestBase {
 
         // And When
         logStep("Checking out products");
-        CheckoutCompleted completed = productsPage.checkout("John", "Doe", "6898");
+        CheckoutCompleted completed = productsPage.checkout(user);
 
         // Then
         Assert.assertEquals(completed.getHeader().getText(), THANK_YOU_FOR_YOUR_ORDER,
@@ -90,10 +92,19 @@ public class SauceDemoTest extends TestBase {
     }
 
     private static Credential[] loadCredentialsJson() throws IOException {
-        InputStream credentialsStream = SauceDemoTest.class.getResourceAsStream("../data/credentials.json");
+        return getJson(Credential[].class, "../data/credentials.json");
+    }
+
+    @DataProvider(name = "loadCheckoutUsersJson")
+    private static CheckoutUser[] loadCheckoutUsersJson() throws IOException {
+        return getJson(CheckoutUser[].class, "../data/checkout_users.json");
+    }
+
+    private static <T> T getJson(Class<T> dataType, String file) throws IOException {
+        InputStream credentialsStream = SauceDemoTest.class.getResourceAsStream(file);
         InputStreamReader credentialsReader = new InputStreamReader(Objects.requireNonNull(credentialsStream));
 
-        Credential[] credentials = new Gson().fromJson(credentialsReader, Credential[].class);
+        T credentials = new Gson().fromJson(credentialsReader, dataType);
 
         credentialsReader.close();
         return credentials;

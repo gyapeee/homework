@@ -1,5 +1,6 @@
 package page.sauce;
 
+import data.CheckoutUser;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -51,11 +52,11 @@ public class ProductsPage {
         return Integer.parseInt(Wait.forVisible(shoppingCartBadge).getText());
     }
 
-    public CheckoutCompleted checkout(String firstName, String lastName, String postalCode) {
+    public CheckoutCompleted checkout(CheckoutUser user) {
         Click.on(shoppingCartLink);
         Scroll.to(checkoutButton);
         Click.on(checkoutButton);
-        new CheckoutInfo().fillInfo(firstName, lastName, postalCode).clickContinueButton();
+        new CheckoutInfo().fillInfo(user).clickContinueButton();
         new CheckoutOverview().clickOnFinishButton();
         return new CheckoutCompleted();
     }

@@ -1,5 +1,6 @@
 package page.sauce.component;
 
+import data.CheckoutUser;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -32,10 +33,10 @@ public class CheckoutInfo {
         Wait.forVisible(postalCodeElement);
     }
 
-    public CheckoutInfo fillInfo(String firstName, String lastName, String postalCode) {
-        Fill.in(firstNameElement, firstName);
-        Fill.in(lastNameElement, lastName);
-        Fill.in(postalCodeElement, postalCode);
+    public CheckoutInfo fillInfo(CheckoutUser user) {
+        Fill.in(firstNameElement, user.getFirstName());
+        Fill.in(lastNameElement, user.getLastName());
+        Fill.in(postalCodeElement, user.getZipCode());
         return this;
     }
 
