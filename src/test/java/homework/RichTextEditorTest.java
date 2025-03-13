@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import page.RichTextEditorPage;
 import runner.TestBase;
 
+@Feature("Text Editor")
 public class RichTextEditorTest extends TestBase {
 
     private static final String AUTOMATION = "Automation";
@@ -16,7 +17,6 @@ public class RichTextEditorTest extends TestBase {
     private static final String NEITHER_ALPHANUMERIC_NOR_SPACE = "[^a-zA-Z0-9 ]";
 
     @Test
-    @Feature("Homework")
     @Story("Rich Text Editor Test")
     @Description("Playing with rich text editor")
     public void validateTextInRichTextEditor_Test3() {

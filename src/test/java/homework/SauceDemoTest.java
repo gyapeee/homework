@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Slf4j
+@Feature("Sauce Lab Demo web shop")
 public class SauceDemoTest extends TestBase {
 
     private static final Credential[] credentials;
@@ -41,7 +42,6 @@ public class SauceDemoTest extends TestBase {
     }
 
     @Test(dataProvider = "loadCheckoutUsersJson")
-    @Feature("Homework")
     @Story("Sauce Demo Test")
     @Description("Verifies purchase process of the sauce lab's demo page")
     public void automatePurchaseProcess_Test_1(CheckoutUser user) {
@@ -68,7 +68,6 @@ public class SauceDemoTest extends TestBase {
     }
 
     @Test
-    @Feature("Homework")
     @Story("Sauce Demo Test")
     @Description("Verifies login error on sauce lab's demo page")
     public void verifyLoginErrorAndFooter_Test_2() {
