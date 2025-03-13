@@ -19,6 +19,7 @@ import static io.restassured.RestAssured.get;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 @Slf4j
+@Feature("API User handling")
 public class ApiTest {
 
     public static final String URL = "https://jsonplaceholder.typicode.com/users";
@@ -26,7 +27,6 @@ public class ApiTest {
     public static final String PARSING_RESPONSE_TO_JSON = "Parsing response to JSON";
 
     @Test
-    @Feature("Homework")
     @Story("ApiTest")
     @Description("Gets users from an endpoint parses it and verifies that the first user has @ symbol in it's e-mail")
     public void getUsersAndVerifyAtInFirstEmail_Test_5() throws IOException {
@@ -48,7 +48,6 @@ public class ApiTest {
     }
 
     @Test
-    @Feature("Homework")
     @Story("ApiTest")
     @Description("More compact RestAssured demo")
     public void restAssuredDemo() {
@@ -56,7 +55,7 @@ public class ApiTest {
 
         Assert.assertNotNull(response, "Response is null");
         Assert.assertEquals(response.getStatusCode(), HTTP_OK,
-                "Response code is not " + HTTP_OK + " but " + response.getStatusCode());
+                            "Response code is not " + HTTP_OK + " but " + response.getStatusCode());
 
         List<User> users = Arrays.asList(response.getBody().as(User[].class));
         Assert.assertTrue(users.get(0).getEmail().contains("@"), "@ symbol is missing from the first user's email ");

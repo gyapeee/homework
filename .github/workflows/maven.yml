@@ -60,6 +60,30 @@ jobs:
       - name: CI with Selenium
         run: mvn test -DconfigFile=config/config.properties
 
+      - name: Set Allure Environment Variables
+        run: |
+          ENV_FILE="target/allure-results/environment.properties"  # Define the full path
+
+          mkdir -p "$(dirname "$ENV_FILE")"  # Ensure the directory exists
+
+          # Create the file if it doesn't exist
+          [ ! -f "$ENV_FILE" ] && touch "$ENV_FILE"
+
+          echo "GitHub Run ID=${{ github.run_id }}" > "$ENV_FILE"
+          echo "GitHub Actions URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> "$ENV_FILE"
+          echo "GitHub Repository=${{ github.repository }}" >> "$ENV_FILE"
+          echo "GitHub Branch=${{ github.ref }}" >> "$ENV_FILE"
+          echo "GitHub Actor=${{ github.actor }}" >> "$ENV_FILE"
+          echo "GitHub Workflow=${{ github.workflow }}" >> "$ENV_FILE"
+          echo "Tested Browser=Chrome" >> "$ENV_FILE"
+          echo "Java Version=$(java -version 2>&1 | awk -F '\"' '/version/ {print $2}')" >> "$ENV_FILE"
+          echo "OS=$(uname -s)" >> "$ENV_FILE"
+          echo "Test Environment=Staging" >> "$ENV_FILE"
+          echo "Build Version=1.0.${{ github.run_number }}" >> "$ENV_FILE"
+          echo "Execution Mode=Headless" >> "$ENV_FILE"
+          echo "Platform Type=Desktop" >> "$ENV_FILE"
+
+
       - name: Cache Allure results
         uses: actions/cache@v3
         with:

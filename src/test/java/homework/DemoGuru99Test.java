@@ -16,6 +16,7 @@ import static runner.Driver.lastWindowHandle;
 import static util.action.Wait._1000_MILLIS;
 import static util.action.Wait._30_SECONDS;
 
+@Feature("Tab, Iframe and alert handling")
 public class DemoGuru99Test extends TestBase {
 
     private static final String URL = "http://demo.guru99.com/test/guru99home";
@@ -29,7 +30,6 @@ public class DemoGuru99Test extends TestBase {
     }
 
     @Test
-    @Feature("Homework")
     @Story("Demo Guru 99 Test")
     @Description(
             "Interacts with elements in an iframe, closes a browser tab, raises and handles an alert, and interacts with a dropdown")

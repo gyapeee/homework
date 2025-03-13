@@ -11,12 +11,12 @@ import runner.TestBase;
 import util.ConfigProperties;
 import util.action.Take;
 
+@Feature("Retry")
 public class RetryTest extends TestBase {
     private static final ConfigProperties config = ConfigFactory.create(ConfigProperties.class);
     private int runCounter = 0;
 
     @Test
-    @Feature("Homework")
     @Story("Retry Test")
     @Description("This test verifies the retry feature of the framework")
     public void passesAfterRetriesAndTakesScreenshot() throws InterruptedException {
