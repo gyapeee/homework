@@ -149,6 +149,30 @@ public class DemoGuru99Test extends TestBase {
     ...
 ```
 
+## Parameterized test
+
+- Test can be parameterized by test data via @DataProvider of TestNG.
+
+```java
+
+@Test(dataProvider = "loadCheckoutUsersJson")
+@Feature("Homework")
+@Story("Sauce Demo Test")
+@Description("Verifies purchase process of the sauce lab's demo page")
+public void automatePurchaseProcess_Test_1(CheckoutUser user) {
+    // Given
+    logStep("Logging in");
+    new LoginPage().login(credentials[PERFORMANCE_GLITCH_USER_INDEX]);
+    
+    ...
+}
+
+@DataProvider(name = "loadCheckoutUsersJson")
+private static CheckoutUser[] loadCheckoutUsersJson() throws IOException {
+    return getJson(CheckoutUser[].class, "../data/checkout_users.json");
+}
+```
+
 <details>
   <summary>Homework plan</summary>
 
