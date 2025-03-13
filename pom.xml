@@ -15,6 +15,7 @@
         <allure.version>2.24.0</allure.version>
         <aspectj.version>1.9.20.1</aspectj.version>
         <selenium.version>4.28.0</selenium.version>
+        <jackson.version>2.17.2</jackson.version>
     </properties>
 
     <dependencies>
@@ -101,6 +102,17 @@
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
                 <version>7.11.0</version>
+            </dependency>
+            <!---jackson-core, and jackson-databind explicit dependencies are only for fixing webdrivermanager vulnerability-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
