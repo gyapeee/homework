@@ -1,0 +1,17 @@
+[
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "zipCode": "6898"
+  },
+  {
+    "firstName": "Éva",
+    "lastName": "Vermut",
+    "zipCode": "1234"
+  },
+  {
+    "firstName": "Jakab",
+    "lastName": "Gipsz",
+    "zipCode": "1212"
+  }
+]
