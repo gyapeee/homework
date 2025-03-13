@@ -9,8 +9,6 @@ import util.action.Fill;
 import util.action.Scroll;
 import util.action.Wait;
 
-import static util.action.Wait._1000_MILLIS;
-import static util.action.Wait._10_SECONDS;
 
 public class DemoGuru99Page {
     private static final By IFRAME_ID = By.id("a077aa5e");
@@ -23,20 +21,20 @@ public class DemoGuru99Page {
     private static final By POST_ELEMENT = By.id("post-542");
 
     public void interactWithIframeAd() {
-        Scroll.to(Wait.forPresence(IFRAME_ID, _10_SECONDS, _1000_MILLIS));
-        Do.underIFrame(IFRAME_ID, () -> Click.on(JMETER_AD_IMAGE, _10_SECONDS, _1000_MILLIS));
+        Scroll.to(Wait.forPresence(IFRAME_ID));
+        Do.underIFrame(IFRAME_ID, () -> Click.on(JMETER_AD_IMAGE));
     }
 
     public void fillAndSubmitEmail(String email) {
-        Scroll.to(Wait.forPresence(SUBMIT_BUTTON, _10_SECONDS, _1000_MILLIS));
-        WebElement emailInput = Wait.forVisible(EMAIL_INPUT, _10_SECONDS, _1000_MILLIS);
+        Scroll.to(Wait.forPresence(SUBMIT_BUTTON));
+        WebElement emailInput = Wait.forVisible(EMAIL_INPUT);
         Fill.in(emailInput, email);
-        Click.on(SUBMIT_BUTTON, _10_SECONDS, _1000_MILLIS);
+        Click.on(SUBMIT_BUTTON);
     }
 
     public void navigateToSeleniumTooltip() {
-        Click.on(SELENIUM_MENU, _10_SECONDS, _1000_MILLIS);
-        Click.on(TOOLTIP_OPTION, _10_SECONDS, _1000_MILLIS);
+        Click.on(SELENIUM_MENU);
+        Click.on(TOOLTIP_OPTION);
     }
 
     public WebElement getDownloadNowElement() {

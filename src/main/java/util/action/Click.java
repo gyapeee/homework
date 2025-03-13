@@ -11,7 +11,7 @@ public class Click {
         Wait.forClickable(element).click();
     }
 
-    public static void on(By element, int seconds, int millis) {
-        Wait.forClickable(element, seconds, millis).click();
+    public static void on(By element) {
+        Wait.forClickable(element).click();
     }
 }
