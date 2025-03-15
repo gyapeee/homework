@@ -4,7 +4,7 @@ Here are the features of Selenium, TestNG, Maven and Java based test framework
 
 ## Parallel test runs with TestNG
 
-- CI workflow runs in parallel by default: https://github.com/gyapeee/homework/actions/workflows/maven.yml
+- CI workflow runs in parallel by default: https://github.com/gyapeee/homework/actions/workflows/quality-gate.yml
 - The tests can run sequentially in local if it is required by changing the ```src/test/resources/testng.xml```
     - Remove ``` parallel="methods" thread-count="6"``` from
       ```<suite name="Homework Suite" verbose="1" parallel="methods" thread-count="6">```
